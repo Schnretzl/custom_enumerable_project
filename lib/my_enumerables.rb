@@ -14,6 +14,17 @@ module Enumerable
     end
     false
   end
+
+  def my_count
+    items = 0
+    unless block_given?      
+      each { items += 1 }
+    else
+      each { |value| items +=1 if yield(value) }
+    end
+  items
+  end
+
 end
 
 
