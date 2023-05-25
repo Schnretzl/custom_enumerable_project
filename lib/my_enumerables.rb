@@ -25,6 +25,14 @@ module Enumerable
   items
   end
 
+  def my_each_with_index
+    index = 0
+    each do |value|
+      yield value, index
+      index += 1
+    end
+  end
+
 end
 
 
