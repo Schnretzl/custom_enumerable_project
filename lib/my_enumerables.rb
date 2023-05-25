@@ -7,7 +7,15 @@ module Enumerable
     end
     true
   end
+
+  def my_any?
+    self.each do |value|
+      return true if yield (value)
+    end
+    false
+  end
 end
+
 
 # You will first have to define my_each
 # on the Array class. Methods defined in
