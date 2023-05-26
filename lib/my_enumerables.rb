@@ -67,6 +67,15 @@ module Enumerable
     true
   end
 
+  def my_select
+    return_array = []
+    my_each do |value, condition|
+      value_contition_eval = yield value, condition
+      return_array <<value if value_contition_eval
+    end
+    return_array
+  end
+
 end
 
 
