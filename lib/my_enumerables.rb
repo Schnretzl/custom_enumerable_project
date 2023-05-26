@@ -2,14 +2,14 @@ module Enumerable
   # Your code goes here
 
   def my_all?
-    each do |value|
+    my_each do |value|
       return false unless yield value
     end
     true
   end
 
   def my_any?
-    each do |value|
+    my_each do |value|
       return true if yield value
     end
     false
@@ -18,16 +18,16 @@ module Enumerable
   def my_count
     items = 0
     unless block_given?
-      each { items += 1 }
+      my_each { items += 1 }
     else
-      each { |value| items += 1 if yield(value) }
+      my_each { |value| items += 1 if yield(value) }
     end
     items
   end
 
   def my_each_with_index
     index = 0
-    each do |value|
+    my_each do |value|
       yield value, index
       index += 1
     end
@@ -39,6 +39,10 @@ module Enumerable
       acc = yield acc, value
     end
     acc
+  end
+
+  def my_map
+    yield split
   end
 
 end
