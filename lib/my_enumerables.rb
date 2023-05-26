@@ -35,14 +35,29 @@ module Enumerable
 
   def my_inject(*initial_value)
     acc = initial_value.empty? ? 0 : initial_value[0]
-    each do |value|
+    my_each do |value|
       acc = yield acc, value
     end
     acc
   end
 
-  def my_map
-    yield split
+  def my_map(*modifier)
+    return_array = []
+    if !modifier.empty? && modifier.first != '&'
+      puts 'Error: called with incorrect format.  Please use &:symbol'
+    elsif !modifier.empty?
+      modifier = modifier[2..-1]
+      my_each do |value|
+        item = yield value, modifier
+        return_array << item
+      end
+    else
+      my_each do |value|
+        item = yield value
+        return_array << item
+      end
+    end
+    return_array
   end
 
 end
