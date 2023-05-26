@@ -2,27 +2,27 @@ module Enumerable
   # Your code goes here
 
   def my_all?
-    self.each do |value|
-      return false unless yield (value)
+    each do |value|
+      return false unless yield value
     end
     true
   end
 
   def my_any?
-    self.each do |value|
-      return true if yield (value)
+    each do |value|
+      return true if yield value
     end
     false
   end
 
   def my_count
     items = 0
-    unless block_given?      
+    unless block_given?
       each { items += 1 }
     else
-      each { |value| items +=1 if yield(value) }
+      each { |value| items += 1 if yield(value) }
     end
-  items
+    items
   end
 
   def my_each_with_index
@@ -31,6 +31,14 @@ module Enumerable
       yield value, index
       index += 1
     end
+  end
+
+  def my_inject(*initial_value)
+    acc = initial_value.empty? ? 0 : initial_value[0]
+    each do |value|
+      acc = yield acc, value
+    end
+    acc
   end
 
 end
