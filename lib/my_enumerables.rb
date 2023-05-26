@@ -60,6 +60,13 @@ module Enumerable
     return_array
   end
 
+  def my_none?
+    my_each do |value|
+      return false if yield value
+    end
+    true
+  end
+
 end
 
 
